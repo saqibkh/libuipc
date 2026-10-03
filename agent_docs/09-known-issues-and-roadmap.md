@@ -1,5 +1,13 @@
 # 09 — Known Issues, Tech Debt, and Roadmap
 
+Performance follow-up, 2026-10-03: the owner prioritizes a fresh, matching-runtime
+baseline and measured optimization; the audit-remediation stages remain deferred.
+The benchmark runner now supports isolated samples worktrees and pre/post hashes
+of declared inputs, installed native binaries, and Python package sources. This
+closes a measurement-provenance gap, not a simulation performance improvement.
+The September reference below is not replaced until fresh uncontended GPU runs
+and repeated comparisons are available.
+
 PR #494 scoped integration (2026-09-16) preserves the contributor's commits and
 retains explicit Python build requirements plus shared CMake/XMake stub generation.
 Direct CMake auto-install and the intentional uninstall-first policy remain.

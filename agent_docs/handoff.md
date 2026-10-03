@@ -1,5 +1,17 @@
 # Handoff — Current State of the Repo
 
+> **Performance baseline preparation (2026-10-03)**: the owner selected the fourth
+> audit-follow-up stage and deferred correctness/interface/frontend remediation.
+> Baseline native source is `9c748a75`. Existing samples edits (88 material stiffness;
+> 93 AL/K_min) remain untouched. A clean detached samples `ecad2ca` worktree is at
+> `output/perf-2026-10-03/samples`. The canonical runner supports
+> `--samples-directory`, records the selected revision, and captures pre/post
+> package/native/input fingerprints outside the frame timing interval. Runtime
+> equality is never inferred from a source SHA or a failed fingerprint probe.
+> Release/CPython 3.14 rebuilding is in progress; GPU measurements are pending the
+> owner's completion of a separate Unified_GIPC workload. No GPU kernel or solver
+> change, new throughput baseline, or speedup has been accepted at this stage.
+
 > **Scoped PR #494 integration (2026-09-16)**: clean worktree
 > `output/pr494-integration`, branch `integration/pr-494-build-cleanup`.
 > The original `946e7ed1` history and the uninstall-policy clarification are
