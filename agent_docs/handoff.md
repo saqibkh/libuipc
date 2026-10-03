@@ -8,9 +8,17 @@
 > `--samples-directory`, records the selected revision, and captures pre/post
 > package/native/input fingerprints outside the frame timing interval. Runtime
 > equality is never inferred from a source SHA or a failed fingerprint probe.
-> Release/CPython 3.14 rebuilding is in progress; GPU measurements are pending the
-> owner's completion of a separate Unified_GIPC workload. No GPU kernel or solver
-> change, new throughput baseline, or speedup has been accepted at this stage.
+> Release/CPython 3.14 rebuilding and installation completed with CUDA 13.2.51.
+> Build output, installed backend, and the frozen `output/perf-2026-10-03/runtime-baseline`
+> package share CUDA DLL SHA-256 `37d68c593c519d9549a38a80519040365bebb24d7eed0b40479b5900493436d3`.
+> Validation: 66 repository tests, 54 Blender portable tests, 80 native-package
+> portable Python tests (one skip, 54 deselected), 13 benchmark-harness tests on
+> Python 3.12, and four canonical dry runs pass. A second incremental build exits
+> successfully with no remaining work. No GPU benchmark/test was started; the
+> owner will notify when the separate Unified_GIPC workload is finished.
+> GPU kernel changes, a new measured throughput baseline, and speedup claims
+> remain pending. Build metadata and a per-frame Timer diagnostic wrapper are
+> in `output/perf-2026-10-03/`; preserve this runtime snapshot for controlled A/B.
 
 > **Scoped PR #494 integration (2026-09-16)**: clean worktree
 > `output/pr494-integration`, branch `integration/pr-494-build-cleanup`.

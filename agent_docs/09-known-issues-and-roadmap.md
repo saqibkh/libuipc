@@ -5,6 +5,9 @@ baseline and measured optimization; the audit-remediation stages remain deferred
 The benchmark runner now supports isolated samples worktrees and pre/post hashes
 of declared inputs, installed native binaries, and Python package sources. This
 closes a measurement-provenance gap, not a simulation performance improvement.
+The Release/CUDA 13.2 CPython 3.14 baseline has been rebuilt, installed, and
+hash-matched to an isolated runtime snapshot (details in `handoff.md`). GPU
+measurements await the owner's completion of another GPU workload.
 The September reference below is not replaced until fresh uncontended GPU runs
 and repeated comparisons are available.
 
