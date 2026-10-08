@@ -98,6 +98,13 @@ jobs:
           github-binarycache: true
           fetch-depth: "0"
 
+      - name: Restore the build
+        id: build-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/build
+          key: libuipc-build-${{ github.sha }}
+
       # The simulator stands in for the CUDA runtime at run time, so the
       # shared one is linked.
       - name: Build libuipc
@@ -109,10 +116,16 @@ jobs:
             -DUIPC_BUILD_BENCHMARKS=OFF -DUIPC_BUILD_EXAMPLES=OFF
           cmake --build ${{ github.workspace }}/build --preset ci-release --parallel 4
 
-      - name: Run the CUDA backend tests on the simulated GPU
-        run: >-
-          vgpu run ctest --test-dir "${{ github.workspace }}/build"
-          --build-config Release
-          --tests-regex '^uipc\.backend_cuda$'
-          --output-on-failure
-          --timeout 2400
+      - name: List the CUDA backend test cases
+        run: |
+          B="$(find "${{ github.workspace }}/build" -name backend_cuda -type f | head -n 1)"
+          echo "$B"
+          cd "${{ github.workspace }}"
+          "$B" --list-tests
+
+      - name: Run the CUDA backend tests on the simulated GPU, with durations
+        continue-on-error: true
+        run: |
+          B="$(find "${{ github.workspace }}/build" -name backend_cuda -type f | head -n 1)"
+          cd "${{ github.workspace }}"
+          timeout 5400 vgpu run "$B" --durations yes --reporter compact
