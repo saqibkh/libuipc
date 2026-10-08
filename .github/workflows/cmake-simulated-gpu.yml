@@ -65,7 +65,7 @@ jobs:
       # Replaces the CUDA toolkit step of cmake.yml: it installs CUDA 12.8 and
       # simulates the GPU.
       - name: Simulated GPU (NVIDIA L4) and CUDA 12.8
-        uses: pantheongpu/pantheonsim@0bd1dd1269895552f69e61beacb1d052503198f5 # pantheonsim 335 + 336, rehearsal
+        uses: pantheongpu/pantheonsim@687180e7e3272ce68965cf550416426678588d8c # pantheonsim 335, 336, 337, 343, rehearsal
         with:
           gpu: nvidia/l4
           cuda-toolkit: '12.8'
@@ -117,8 +117,9 @@ jobs:
           cmake --build ${{ github.workspace }}/build --preset ci-release --parallel 4
 
       - name: List the CUDA backend test cases
+        continue-on-error: true
         run: |
-          B="$(find "${{ github.workspace }}/build" -name backend_cuda -type f | head -n 1)"
+          B="$(find "${{ github.workspace }}/build" -name uipc_test_backend_cuda -type f | head -n 1)"
           echo "$B"
           cd "${{ github.workspace }}"
           "$B" --list-tests
@@ -126,6 +127,6 @@ jobs:
       - name: Run the CUDA backend tests on the simulated GPU, with durations
         continue-on-error: true
         run: |
-          B="$(find "${{ github.workspace }}/build" -name backend_cuda -type f | head -n 1)"
+          B="$(find "${{ github.workspace }}/build" -name uipc_test_backend_cuda -type f | head -n 1)"
           cd "${{ github.workspace }}"
           timeout 5400 vgpu run "$B" --durations yes --reporter compact
